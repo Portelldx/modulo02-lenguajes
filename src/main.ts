@@ -9,67 +9,67 @@ const arr3: Array<string> = ['g', 'h', 'i'];
 
 const head = ([first]: Array<string>) => first;
 
-console.log("Ejercicio 1 Head: ", head(arr));
+console.log('Ejercicio 1 Head: ', head(arr));
 
 // Tail
 // Implementa una función tail (inmutable), tal que, dado un array como entrada devuelta todos menos el primer elemento. Utiliza rest operator.
 
 const tail = ([, ...rest]: Array<string>) => rest;
-console.log("Ejercicio 1 Tail: ", tail(arr));
+console.log('Ejercicio 1 Tail: ', tail(arr));
 
 // Init
 // Implementa una función init (inmutable), tal que, dado un array como entrada devuelva todos los elementos menos el último. Utiliza los métodos que ofrece Array.prototype.
 
 const init = (array: Array<string>): Array<string> => {
-    return array.slice(0, -1);
+  return array.slice(0, -1);
 };
 
-console.log("Ejercicio 1 Init:", init(arr));
+console.log('Ejercicio 1 Init:', init(arr));
 
 // Last
 // Implementa una función last (inmutable), tal que, dado un array como entrada devuelva el último elemento.
 
 const last = (array: Array<string>): string => array[array.length - 1];
-console.log("Ejercicio 1 Last: " + last(arr));
-
-
+console.log('Ejercicio 1 Last: ' + last(arr));
 
 // 2. Concat
 // Implementa una función concat (inmutable) tal que, dados 2 arrays como entrada, devuelva la concatenación de ambos. Utiliza rest / spread operators.
 
-const concat = (a: Array<string>, b: Array<string>): Array<string> => [...a, ...b];
-console.log("Ejercicio 2 Concat: " + concat(arr, arr2))
-
+const concat = (a: Array<string>, b: Array<string>): Array<string> => [
+  ...a,
+  ...b,
+];
+console.log('Ejercicio 2 Concat: ' + concat(arr, arr2));
 
 // Opcional
 // Implementa una versión del ejercicio anterior donde se acepten múltiples arrays de entrada (más de 2).
 
-const concat2 = (...arrays: Array<Array<string>>): Array<string> => arrays.flat();
-console.log("Ejercicio 2 Concat (múltiples arrays):", concat2(arr, arr2, arr3));
-
+const concat2 = (...arrays: Array<Array<string>>): Array<string> =>
+  arrays.flat();
+console.log('Ejercicio 2 Concat (múltiples arrays):', concat2(arr, arr2, arr3));
 
 // 3. Clone Merge
 // Clone
 
 // Implementa una función clone que, a partir de un objeto de entrada source devuelva un nuevo objeto con las propiedades de source:
 
-const obj1 = { nombre: 'Jordi', apellidos: 'Portell', poblacion: 'Sant Quirze' };
+const obj1 = {
+  nombre: 'Jordi',
+  apellidos: 'Portell',
+  poblacion: 'Sant Quirze',
+};
 
 function clone(source: object): object {
-
-    return { ...source }
-
+  return { ...source };
 }
-console.log("Ejercicio 3 - Clone", clone(obj1));
-
-
+console.log('Ejercicio 3 - Clone', clone(obj1));
 
 // Merge
 
 // Implementa una función merge que, dados dos objetos de entrada source y target, devuelva un nuevo objeto con todas las propiedades de target y de source, y en caso de propiedades con el mismo nombre, source sobreescribe a target.
 
-const a = { name: "Maria", surname: "Ibañez", country: "SPA" };
-const b = { name: "Luisa", age: 31, married: true };
+const a = { name: 'Maria', surname: 'Ibañez', country: 'SPA' };
+const b = { name: 'Luisa', age: 31, married: true };
 
 // el resultado de mezclar a sobre b sería:
 
@@ -77,38 +77,37 @@ const b = { name: "Luisa", age: 31, married: true };
 // TIP: Puedes usar la función "clone" del apartado A.
 
 function merge(source: object, target: object): object {
-    const clonedTarget = clone(target);
-    return {
-        ...clonedTarget,
-        ...source
-    };
+  const clonedTarget = clone(target);
+  return {
+    ...clonedTarget,
+    ...source,
+  };
 }
-console.log("Ejercicio 3 - Merge", merge(a, b))
-
+console.log('Ejercicio 3 - Merge', merge(a, b));
 
 // 4. Read Books
 
 // Crea una función isBookRead que reciba una lista de libros y un título y devuelva si se ha leído o no dicho libro. Un libro es un objeto con title como string y isRead como booleano. En caso de no existir el libro devolver false TIP: Existe un método de Array.prototype que te ayudará a buscar según un patrón.
 
 interface Book {
-    title: string;
-    isRead: boolean;
+  title: string;
+  isRead: boolean;
 }
 
 const books: Array<Book> = [
-    { title: "Harry Potter y la piedra filosofal", isRead: true },
-    { title: "Canción de hielo y fuego", isRead: false },
-    { title: "Devastación", isRead: true },
+  { title: 'Harry Potter y la piedra filosofal', isRead: true },
+  { title: 'Canción de hielo y fuego', isRead: false },
+  { title: 'Devastación', isRead: true },
 ];
 
 function isBookRead(books: Array<Book>, titleToSearch: string): boolean {
-    const foundBook = books.find(book => book.title === titleToSearch);
-    return foundBook ? foundBook.isRead : false;
+  const foundBook = books.find((book) => book.title === titleToSearch);
+  return foundBook ? foundBook.isRead : false;
 }
 
-console.log(isBookRead(books, "Devastación")); // true
-console.log(isBookRead(books, "Canción de hielo y fuego")); // false
-console.log(isBookRead(books, "Los Pilares de la Tierra")); // false
+console.log(isBookRead(books, 'Devastación')); // true
+console.log(isBookRead(books, 'Canción de hielo y fuego')); // false
+console.log(isBookRead(books, 'Los Pilares de la Tierra')); // false
 
 // 5. Slot Machine
 
@@ -122,13 +121,36 @@ console.log(isBookRead(books, "Los Pilares de la Tierra")); // false
 // "Good luck next time!!".
 // Ejemplo de uso
 
-// class SlothMachine {
-//   /* ... */
-// }
+const getRandomBoolean = (): boolean => {
+  return Math.random() < 0.5;
+};
 
-// const machine1 = new SlothMachine();
-// machine1.play(); // "Good luck next time!!"
-// machine1.play(); // "Good luck next time!!"
-// machine1.play(); // "Congratulations!!!. You won 3 coins!!"
-// machine1.play(); // "Good luck next time!!"
-// machine1.play(); // "Congratulations!!!. You won 2 coins!!"
+class SlothMachine {
+  private coins: number;
+  constructor() {
+    this.coins = 0;
+  }
+  play() {
+    this.coins++;
+
+    const random1 = getRandomBoolean();
+    const random2 = getRandomBoolean();
+    const random3 = getRandomBoolean();
+
+    if (random1 && random2 && random3) {
+      const winnings = this.coins;
+      this.coins = 0;
+      console.log(`Congratulations!!!. You won ${winnings} coins!!`);
+    } else {
+      console.log('Good luck next time!!');
+    }
+  }
+}
+
+const machine1 = new SlothMachine();
+
+machine1.play(); // "Good luck next time!!"
+machine1.play(); // "Good luck next time!!"
+machine1.play(); // "Congratulations!!!. You won 3 coins!!"
+machine1.play(); // "Good luck next time!!"
+machine1.play(); // "Congratulations!!!. You won 2 coins!!"
